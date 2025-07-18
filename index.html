@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ameer Ahmad</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #181c24;
+      color: #e0e0e0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #1a2233;
+      color: #ffa500;
+      padding: 2rem 1rem 1.5rem 1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ffa500;
+      box-shadow: 0 0 24px #ffa50099;
+      animation: popIn 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      background: #181c24;
+    }
+
+    .header-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 220px;
+    }
+
+    .header-content h1 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #ffa500;
+      letter-spacing: 2px;
+      animation: glow 2s infinite alternate;
+    }
+
+    .header-content p {
+      margin: 0.5rem 0 0;
+      font-size: 1.2rem;
+      color: #b8c1ec;
+      font-weight: 600;
+      opacity: 0;
+      animation: fadeInDown 1.2s 0.5s forwards;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-left: 5px solid #ffa500;
+      padding-left: 0.5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .about-info,
+    .about-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .about-info {
+      flex: 2;
+    }
+
+    .about-details {
+      flex: 1;
+      min-width: 230px;
+    }
+
+    .about-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .about-details li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .stats {
+      display: flex;
+      gap: 2rem;
+      margin: 1rem 0;
+    }
+
+    .stat {
+      background: #232946;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      flex: 1;
+      box-shadow: 0 0 8px #ffa500aa;
+      transform: scale(0.95);
+      transition: box-shadow 0.3s, transform 0.3s;
+      color: #ffa500;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      color: #ffa500;
+    }
+
+    .stat:hover {
+      box-shadow: 0 0 24px #ffa500cc;
+      transform: scale(1.02);
+    }
+
+    /* Skills Section */
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: flex-start;
+    }
+
+    .skill {
+      background: #232946;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+      flex: 1 1 220px;
+      min-width: 170px;
+      max-width: 260px;
+      box-shadow: 0 0 6px #b8c1ec33;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+      padding: 0.7rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+
+    .skill-label-row {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .skill-label {
+      font-weight: 500;
+      font-size: 1rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .skill-percent {
+      font-size: 1rem;
+      color: #ffa500;
+      font-weight: bold;
+      min-width: 40px;
+      text-align: right;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .skill-bar {
+      background: #b8c1ec;
+      height: 8px;
+      border-radius: 4px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      min-width: 60px;
+      max-width: 100%;
+    }
+
+    .skill-bar-fill {
+      background: #ffa500;
+      height: 100%;
+      border-radius: 4px;
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* Responsive: 2 columns on mobile, compact blocks */
+    @media (max-width: 900px) {
+      .skills-list {
+        gap: 0.7rem;
+      }
+
+      .skill {
+        flex: 1 1 46%;
+        min-width: 140px;
+        max-width: 100%;
+        padding: 0.55rem 0.7rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .skills-list {
+        gap: 0.5rem;
+      }
+
+      .skill {
+        flex: 1 1 100%;
+        min-width: 95px;
+        max-width: 100%;
+        padding: 0.45rem 0.6rem;
+      }
+
+      .skill-label {
+        font-size: 0.98rem;
+      }
+
+      .skill-percent {
+        font-size: 0.98rem;
+        margin-left: 0.5rem;
+      }
+
+      .skill-bar {
+        min-width: 40px;
+        max-width: 100%;
+      }
+    }
+
+    .resume-section {
+      margin-bottom: 2rem;
+    }
+
+    .resume-block {
+      background: #232946;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px #b8c1ec33;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .resume-block h3 {
+      margin: 0 0 0.5rem;
+      color: #ffa500;
+    }
+
+    .resume-block p,
+    .resume-block ul {
+      margin: 0.2rem 0 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    .portfolio-list,
+    .services-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .portfolio-item,
+    .service-item {
+      background: #232946;
+      border-radius: 8px;
+      padding: 1rem;
+      flex: 1 1 250px;
+      margin-bottom: 1rem;
+      min-width: 220px;
+      box-shadow: 0 0 8px #b8c1ec33;
+      opacity: 0;
+      transform: scale(0.98);
+      transition: all 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .portfolio-item:hover,
+    .service-item:hover {
+      box-shadow: 0 0 24px #ffa500cc;
+      transform: scale(1.03);
+    }
+
+    .portfolio-item b {
+      color: #ffa500;
+    }
+
+    .portfolio-img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 0 10px #b8c1ec55;
+    }
+
+    .contact-info p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .contact-info a {
+      color: #ffa500;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #232946;
+      color: #b8c1ec;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Animations */
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 8px #ffa500, 0 0 20px #ffa500;
+      }
+
+      to {
+        text-shadow: 0 0 24px #ffa500, 0 0 40px #ffa500;
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .revealed {
+      opacity: 1 !important;
+      transform: none !important;
+      transition:
+        opacity 1.1s cubic-bezier(0.25, 0.8, 0.25, 1),
+        transform 1.1s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .skill.revealed .skill-bar-fill {
+      width: var(--skill-width, 80%) !important;
+    }
+
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem 1rem 1rem 1rem;
+      }
+
+      .header-content h1 {
+        font-size: 2rem;
+      }
+
+      .about-info,
+      .about-details,
+      .stats,
+      .portfolio-list,
+      .services-list {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="profile3.jpeg" alt="Ameer Ahmad" class="profile-pic" />
+    <div class="header-content">
+      <h1>Ameer Ahmad</h1>
+      <p>Web Developer | IT Graduate | Tech Educator</p>
+    </div>
+  </header>
+  <main>
+    <!-- About Section -->
+    <section>
+      <h2>About</h2>
+      <div class="about-info">
+        <div>
+          <p>
+            Dedicated and enthusiastic Information Technology professional with hands-on experience in web development,
+            teaching, and customer support. Proven ability to manage projects, communicate effectively, and adapt to new
+            technologies. Eager to contribute technical skills and a strong work ethic to a dynamic organization.
+          </p>
+          <div class="stats">
+            <div class="stat"><strong>3+</strong> Years Web Development</div>
+            <div class="stat"><strong>4+</strong> Years Teaching</div>
+            <div class="stat"><strong>3+</strong> Certifications</div>
+          </div>
+        </div>
+        <div class="about-details">
+          <ul>
+            <li><b>Birthday:</b> 7 Nov 2004</li>
+            <li><b>Phone:</b> +92 324 9895466</li>
+            <li><b>City:</b> Lahore, Pakistan</li>
+            <li><b>Age:</b> 20</li>
+            <li><b>Degree:</b> BS Information Technology</li>
+            <li><b>Email:</b> <a href="mailto:ahmadsulaman466@gmail.com"
+                style="color:#ffa500; text-decoration:none;">ahmadsulaman466@gmail.com</a></li>
+            <li><b>Freelance:</b> Available</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+      <h2>Skills</h2>
+      <div class="skills-list">
+        <div class="skill" style="--skill-width:95%;">
+          <div class="skill-label-row">
+            <span class="skill-label">HTML</span>
+            <span class="skill-percent">95%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:90%;">
+          <div class="skill-label-row">
+            <span class="skill-label">CSS</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:80%;">
+          <div class="skill-label-row">
+            <span class="skill-label">JavaScript</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:85%;">
+          <div class="skill-label-row">
+            <span class="skill-label">PHP</span>
+            <span class="skill-percent">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:90%;">
+          <div class="skill-label-row">
+            <span class="skill-label">Bootstrap</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:80%;">
+          <div class="skill-label-row">
+            <span class="skill-label">MySQL</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:65%;">
+          <div class="skill-label-row">
+            <span class="skill-label">Ubuntu/Kali Linux</span>
+            <span class="skill-percent">65%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:70%;">
+          <div class="skill-label-row">
+            <span class="skill-label">Networking</span>
+            <span class="skill-percent">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:90%;">
+          <div class="skill-label-row">
+            <span class="skill-label">C Language</span>
+            <span class="skill-percent">90%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:80%;">
+          <div class="skill-label-row">
+            <span class="skill-label">C++</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+        <div class="skill" style="--skill-width:80%;">
+          <div class="skill-label-row">
+            <span class="skill-label">Object Oriented Programing</span>
+            <span class="skill-percent">80%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section>
+      <h2>Resume</h2>
+      <div class="resume-section">
+        <div class="resume-block">
+          <h3>Summary</h3>
+          <p>
+            I am a results-driven IT professional with a passion for creating innovative web solutions and sharing
+            knowledge through education. With over 2 years of hands-on web development experience and 4 years in
+            teaching technical subjects, I bring a unique blend of technical expertise and communication skills to every
+            project. 
+          </p>
+        </div>
+        <div class="resume-block">
+          <h3>Professional Experience</h3>
+          <ul>
+            <li>
+              <b>Web Developer</b> (2022 – Present)<br>
+              Freelance<br>
+              <ul>
+                <li>Developed dynamic and responsive websites for clients using HTML, CSS, JavaScript, PHP, and MySQL.
+                </li>
+                <li>Created interactive and animated web projects for diverse needs.</li>
+              </ul>
+            </li>
+            <li>
+              <b>Customer Service Representative</b> (2023 – 2024)<br>
+              SHJ International<br>
+              <ul>
+                <li>Handled customer inquiries and provided technical support.</li>
+                <li>Resolved issues promptly, maintaining customer satisfaction.</li>
+              </ul>
+            </li>
+            <li>
+              <b>Teacher</b> (2021 – 2025)<br>
+              <ul>
+                <li>Taught computer science and IT-related subjects.</li>
+                <li>Developed lesson plans and assessed student performance.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="resume-block">
+          <h3>Education</h3>
+          <ul>
+            <li>
+              <b>BS in Information Technology</b> (2021 - 2025)<br>
+              Virtual University of Pakistan
+            </li>
+            <li>
+              <b>F.Sc (Pre-Engineering)</b> (2019 - 2021)<br>
+              Govt. Shalimar Post Graduate College, Lahore
+            </li>
+          </ul>
+        </div>
+        <div class="resume-block">
+          <h3>Certifications</h3>
+          <ul>
+            <li>Networking Essentials – Cisco Networking Academy (July 2023)</li>
+            <li>CIT (Web and Application Development) – UET (May 2023 - Aug 2023)</li>
+            <li>Mathematics with MATLAB – PDC (Nov 2022)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section with Images -->
+    <section>
+      <h2>Portfolio</h2>
+      <div class="portfolio-list">
+        <div class="portfolio-item">
+          <b>Event Management System</b><br>
+          <span>Web Development</span><br>
+          <p>Developed a full-featured web application for event planning, registration, and management, including user
+            authentication and admin dashboard.</p>
+          <img src="event.png" class="portfolio-img" alt="Event Management System" />
+
+        </div>
+        <div class="portfolio-item">
+          <b>Travel and Tour Website</b><br>
+          <span>Web Development</span><br>
+          <p>Designed and built a modern, responsive website for a travel agency, featuring detailed package listings,
+            secure booking forms, and interactive maps.</p>
+          <img src="tour2.png" class="portfolio-img" alt="Travel and Tour Website" />
+
+        </div>
+        <div class="portfolio-item">
+          <b>Movie List Interactive Page</b><br>
+          <span>UI/UX & JavaScript</span><br>
+          <p>Created a dynamic page displaying a list of movies. Each movie card smoothly expands and reveals more info
+            when hovered, using advanced CSS transitions and JavaScript.</p>
+          <img src="img_slider.png" class="portfolio-img" alt="Movie List Interactive Page" />
+
+        </div>
+        <div class="portfolio-item">
+          <b>Animated Eyes Page</b><br>
+          <span>Canvas & JavaScript</span><br>
+          <p>Developed a playful web page where illustrated eyes follow the user's cursor, demonstrating creative DOM
+            manipulation and animation.</p>
+          <img src="eye.png" class="portfolio-img" alt="Animated Eyes Page" />
+
+        </div>
+        <div class="portfolio-item">
+          <b>Networking Lab Setup</b><br>
+          <span>Networking</span><br>
+          <p>Configured and managed virtual networking labs using Ubuntu and Kali Linux environments.</p>
+          <img src="kali.png" class="portfolio-img" alt="Animated Eyes Page" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section>
+      <h2>Services</h2>
+      <div class="services-list">
+        <div class="service-item">
+          <b>Web Development</b>
+          <p>I build responsive, user-friendly websites from concept to launch, handling design, front-end (HTML5, CSS3,
+            JavaScript), back-end (PHP, MySQL), testing, and deployment. I also offer ongoing support to ensure
+            performance and SEO optimization.</p>
+        </div>
+        <div class="service-item">
+          <b>IT Training</b>
+          <p>Comprehensive technical education services for individuals and organizations. I create customized training
+            programs covering web development fundamentals, programming languages, database management, and networking
+            concepts. </p>
+        </div>
+        <div class="service-item">
+          <b>Technical Support</b>
+          <p>Professional IT assistance for businesses and individuals facing technical challenges. My support services
+            include troubleshooting hardware and software issues, system optimization, data recovery, security
+            assessments, and implementation of best practices.
+          </p>
+        </div>
+        <div class="service-item">
+          <b>Networking Solutions</b>
+          <p>Custom network design and implementation for educational institutions and small businesses. I offer
+            services including network architecture planning, hardware selection and configuration, security
+            implementation, virtual lab environments, and documentation. My networking solutions focus on reliability,
+            security, scalability, and ease of management, with training provided to ensure clients can maintain their
+            systems effectively.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section>
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p><b>Address:</b> Lahore, Pakistan </p>
+        <p><b>Phone:</b> +92 324 9895466</p>
+        <p><b>Email:</b> <a href="mailto:ahmadsulaman466@gmail.com"
+            style="color:#ffa500; text-decoration:none;">ahmadsulaman466@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; Ameer Ahmad. All rights reserved.
+  </footer>
+  <script>
+    // Smoother reveal on scroll
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll('section, h2, .skill, .resume-block, .portfolio-item, .service-item, .contact-info p');
+      for (let el of reveals) {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 80) {
+          el.classList.add('revealed');
+        }
+      }
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('DOMContentLoaded', () => {
+      revealOnScroll();
+      setTimeout(() => {
+        document.querySelectorAll('.skill').forEach(skill => {
+          skill.classList.add('revealed');
+        });
+      }, 600);
+    });
+  </script>
+</body>
+
+</html>

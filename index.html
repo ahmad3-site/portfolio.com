@@ -69,7 +69,8 @@
       font-size: 1.2rem;
       color: #b8c1ec;
       font-weight: 600;
-      opacity: 1; /* ensure visible since animation removed for this element */
+      opacity: 1;
+      /* ensure visible since animation removed for this element */
       animation: none;
     }
 
@@ -437,6 +438,29 @@
         gap: 1rem;
       }
     }
+
+    .resume-btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 5px 12px;
+      /* smaller width */
+      background: transparent;
+      color: #ff9f0a;
+      font-weight: 600;
+      font-size: 0.85rem;
+      border: 2px solid #ff9f0a;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .resume-btn:hover {
+      background: #ff9f0a;
+      color: #0f1218;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(255, 159, 10, 0.35);
+    }
   </style>
 </head>
 
@@ -446,8 +470,14 @@
     <div class="header-content">
       <h1>Ameer Ahmad</h1>
       <p id="typing-text"></p>
+
+      <!-- Resume Download Button -->
+      <div class="resume-btn-wrapper">
+        <a href="resume.pdf" class="resume-btn" download>Download Resume</a>
+      </div>
     </div>
   </header>
+
   <main>
     <!-- About Section -->
     <section>
@@ -697,36 +727,51 @@
     <section>
       <h2>Services</h2>
       <div class="services-list">
+
         <div class="service-item">
           <b>Web Development</b>
-          <p>I build responsive, user-friendly websites from concept to launch, handling design, front-end (HTML5, CSS3,
-            JavaScript), back-end (PHP, MySQL, Python, Django), testing, and deployment. I also offer ongoing support to
-            ensure
-            performance and SEO optimization.</p>
+          <p>I build fast, secure, and user-friendly websites tailored to business needs.</p>
+          <ul style="margin-top:8px;">
+            <li>Responsive UI and clean UX</li>
+            <li>Scalable backend and database integration</li>
+            <li>SEO optimization and performance tuning</li>
+            <li>Deployment and maintenance</li>
+          </ul>
         </div>
+
         <div class="service-item">
-          <b>IT Training</b>
-          <p>Comprehensive technical education services for individuals and organizations. I create customized training
-            programs covering web development fundamentals, programming languages, database management, and networking
-            concepts. </p>
+          <b>Web Application Development</b>
+          <p>I develop custom dynamic web apps for business automation and user interaction.</p>
+          <ul style="margin-top:8px;">
+            <li>Authentication & admin dashboards</li>
+            <li>Database-driven systems</li>
+            <li>Feature-rich, secure, and scalable architecture</li>
+          </ul>
         </div>
+
         <div class="service-item">
-          <b>Technical Support</b>
-          <p>Professional IT assistance for businesses and individuals facing technical challenges. My support services
-            include troubleshooting hardware and software issues, system optimization, data recovery, security
-            assessments, and implementation of best practices.
-          </p>
+          <b>IT Training & Mentorship</b>
+          <p>I teach students and professionals modern web development and core IT skills.</p>
+          <ul style="margin-top:8px;">
+            <li>Hands-on coding training</li>
+            <li>Project-based learning</li>
+            <li>Personalized guidance and career support</li>
+          </ul>
         </div>
+
         <div class="service-item">
-          <b>Networking Solutions</b>
-          <p>Custom network design and implementation for educational institutions and small businesses. I offer
-            services including network architecture planning, hardware selection and configuration, security
-            implementation, virtual lab environments, and documentation. My networking solutions focus on reliability,
-            security, scalability, and ease of management, with training provided to ensure clients can maintain their
-            systems effectively.</p>
+          <b>Network & System Support</b>
+          <p>I provide small business IT setup and support solutions.</p>
+          <ul style="margin-top:8px;">
+            <li>Network configuration and troubleshooting</li>
+            <li>System security and optimization</li>
+            <li>Backup & maintenance strategy</li>
+          </ul>
         </div>
+
       </div>
     </section>
+
 
     <!-- Contact Section -->
     <section>

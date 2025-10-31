@@ -63,6 +63,29 @@
       animation: fadeInDown 1.2s 0.5s forwards;
     }
 
+    /* Typing cursor style for the animated role text */
+    #typing-text {
+      margin: 0.5rem 0 0;
+      font-size: 1.2rem;
+      color: #b8c1ec;
+      font-weight: 600;
+      opacity: 1; /* ensure visible since animation removed for this element */
+      animation: none;
+    }
+
+    #typing-text::after {
+      content: "|";
+      color: #ffa500;
+      margin-left: 6px;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
     main {
       max-width: 900px;
       margin: 2rem auto;
@@ -422,7 +445,7 @@
     <img src="profile3.jpeg" alt="Ameer Ahmad" class="profile-pic" />
     <div class="header-content">
       <h1>Ameer Ahmad</h1>
-      <p>Web Developer</p>
+      <p id="typing-text"></p>
     </div>
   </header>
   <main>
@@ -444,7 +467,6 @@
         </div>
         <div class="about-details">
           <ul>
-            <li><b>Birthday:</b> 7 Nov 2004</li>
             <li><b>Phone:</b> +92 324 9895466</li>
             <li><b>City:</b> Lahore, Pakistan</li>
             <li><b>Age:</b> 21</li>
@@ -571,10 +593,13 @@
         <div class="resume-block">
           <h3>Summary</h3>
           <p>
-            I am a results-driven IT professional with a passion for creating innovative web solutions and sharing
-            knowledge through education. With over 2 years of hands-on web development experience and 4 years in
-            teaching technical subjects, I bring a unique blend of technical expertise and communication skills to every
-            project.
+            I am a motivated Web Developer with hands-on experience building dynamic and user-focused web applications
+            using HTML, CSS, JavaScript, PHP, MySQL, Python, and Django. I enjoy turning ideas into functional products
+            with clean code, strong usability, and smooth performance. I have developed complete projects including a
+            travel and tourism website and an Event Management System featuring user authentication, event management,
+            and RSVP functionality. I also work with backend logic, databases, and APIs to deliver secure and scalable
+            solutions. I am continuously learning and exploring modern technologies to grow as a developer and create
+            meaningful digital experiences.
           </p>
         </div>
         <div class="resume-block">
@@ -639,16 +664,12 @@
           <span>Web Development</span><br>
           <p>Developed a full-featured web application for event planning, registration, and management, including user
             authentication and admin dashboard.</p>
-          <img src="event.png" class="portfolio-img" alt="Event Management System" />
-
         </div>
         <div class="portfolio-item">
           <b>Travel and Tour Website</b><br>
           <span>Web Development</span><br>
           <p>Designed and built a modern, responsive website for a travel agency, featuring detailed package listings,
             secure booking forms, and interactive maps.</p>
-          <img src="tour2.png" class="portfolio-img" alt="Travel and Tour Website" />
-
         </div>
         <a href="https://ahmad3-site.github.io/image-slider/" target="_blank"
           style="text-decoration: none; color: inherit;">
@@ -669,12 +690,6 @@
               manipulation and animation.</p>
           </div>
         </a>
-        <div class="portfolio-item">
-          <b>Networking Lab Setup</b><br>
-          <span>Networking</span><br>
-          <p>Configured and managed virtual networking labs using Ubuntu and Kali Linux environments.</p>
-          <img src="kali.png" class="portfolio-img" alt="Animated Eyes Page" />
-        </div>
       </div>
     </section>
 
@@ -685,7 +700,8 @@
         <div class="service-item">
           <b>Web Development</b>
           <p>I build responsive, user-friendly websites from concept to launch, handling design, front-end (HTML5, CSS3,
-            JavaScript), back-end (PHP, MySQL), testing, and deployment. I also offer ongoing support to ensure
+            JavaScript), back-end (PHP, MySQL, Python, Django), testing, and deployment. I also offer ongoing support to
+            ensure
             performance and SEO optimization.</p>
         </div>
         <div class="service-item">
@@ -748,6 +764,47 @@
       }, 600);
     });
   </script>
+
+  <!-- Typing animation script (only changes the text under the name) -->
+  <script>
+    (function () {
+      const roles = ["Web Developer", "Web Application Developer"];
+      let roleIndex = 0;
+      let charIndex = 0;
+      const typingSpeed = 100;
+      const erasingSpeed = 60;
+      const delayAfterComplete = 1000;
+
+      const typingEl = document.getElementById('typing-text');
+
+      function type() {
+        if (charIndex < roles[roleIndex].length) {
+          typingEl.textContent += roles[roleIndex].charAt(charIndex);
+          charIndex++;
+          setTimeout(type, typingSpeed);
+        } else {
+          setTimeout(erase, delayAfterComplete);
+        }
+      }
+
+      function erase() {
+        if (charIndex > 0) {
+          typingEl.textContent = roles[roleIndex].substring(0, charIndex - 1);
+          charIndex--;
+          setTimeout(erase, erasingSpeed);
+        } else {
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(type, typingSpeed);
+        }
+      }
+
+      // Start typing once DOM is ready
+      document.addEventListener('DOMContentLoaded', function () {
+        // small delay so header fade-in finishes (keeps original feel)
+        setTimeout(type, 600);
+      });
+    })();
+  </script>
 </body>
 
-        </html>
+</html>
